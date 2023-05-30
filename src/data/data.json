@@ -1,0 +1,130 @@
+{
+  "questions": [
+    {
+      "name": "What is your name?",
+      "text": "a paragraph of random text...!",
+      "type": "TEXT",
+      "options": [],
+      "defaultValue": null,
+      "isRequired": true,
+      "validations": [
+        {
+          "type": "min",
+          "message": "Your name must not be shorter than 3 characters."
+        },
+        {
+          "type": "max",
+          "message": "Your name must not be longer than 25 characters."
+        }
+      ]
+    },
+    {
+      "name": "What is your gender?",
+      "text": "a paragraph of random text...!",
+      "type": "RADIO",
+      "options": [
+        {
+          "key": "FEMALE",
+          "text": "Female"
+        },
+        {
+          "key": "MALE",
+          "text": "Male"
+        },
+        {
+          "key": "OTHER",
+          "text": "Other"
+        }
+      ],
+      "defaultValue": null,
+      "isRequired": true,
+      "validations": []
+    },
+    {
+      "name": "What is the date of your birth?",
+      "text": "a paragraph of random text...!",
+      "type": "DATE",
+      "options": [],
+      "defaultValue": null,
+      "isRequired": true,
+      "validations": [
+        {
+          "type": "conditional",
+          "condition": {
+            "variable": "QUESTION_2",
+            "operator": "!=",
+            "value": "OTHER"
+          }
+        }
+      ]
+    },
+    {
+      "name": "What insurances do you have?",
+      "text": "a paragraph of random text...!",
+      "type": "CHECKBOX",
+      "options": [
+        {
+          "key": "HEALTH",
+          "text": "Health"
+        },
+        {
+          "key": "LIABILITY",
+          "text": "Liability"
+        },
+        {
+          "key": "LEGAL",
+          "text": "Legal"
+        },
+        {
+          "key": "CAR",
+          "text": "Car"
+        }
+      ],
+      "defaultValue": null,
+      "isRequired": true,
+      "validations": []
+    },
+    {
+      "name": "What is your phone number?",
+      "text": "a paragraph of random text...!",
+      "type": "NUMBER",
+      "options": [],
+      "defaultValue": null,
+      "isRequired": true,
+      "validations": [
+        {
+          "type": "conditional",
+          "condition": {
+            "variable": "QUESTION_5",
+            "operator": "==",
+            "value": "EMPLOYEE"
+          }
+        },
+        {
+          "type": "conditional",
+          "condition": {
+            "variable": "QUESTION_5",
+            "operator": "==",
+            "value": "BUSINESS_OWNER"
+          }
+        },
+        {
+          "type": "conditional",
+          "condition": {
+            "variable": "QUESTION_5",
+            "operator": "==",
+            "value": "STUDENT"
+          }
+        },
+        {
+          "type": "min",
+          "message": "Your number must be only digits and not shorter than 7."
+        },
+        {
+          "type": "max",
+          "message": "Your number must be only digits and not longer than 12."
+        }
+      ]
+    }
+  ]
+}
