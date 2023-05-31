@@ -25,7 +25,6 @@ const AccordionItem = (props: Props) => {
     open = false,
     isIcon = false,
     className = "",
-    openLogo = "/images/icons/minus.svg",
     isTitleBold = true,
     isOpenMargin = true,
     onChange,
@@ -70,13 +69,31 @@ const AccordionItem = (props: Props) => {
             )}
           </div>
         </div>
-        <div>
+        <div className="flex items-center gap-2">
           {isIcon &&
             (isOpen ? (
-              <OvalIcon isResponse={true} />
+              <img
+                src="/images/icons/minus.svg"
+                alt="minus"
+                width={17}
+                height={17}
+              />
             ) : (
-              <OvalIcon isResponse={false} />
+              <img
+                src="/images/icons/plus.svg"
+                alt="plus"
+                width={19}
+                height={19}
+              />
             ))}
+          <div>
+            {isIcon &&
+              (isIcon ? (
+                <OvalIcon isResponse={true} />
+              ) : (
+                <OvalIcon isResponse={false} />
+              ))}
+          </div>
         </div>
       </Button>
       {isOpen && <div>{children}</div>}
