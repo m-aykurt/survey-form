@@ -1,74 +1,21 @@
-import React from "react";
 import AccordionItem from "../../atoms/accordion-item";
 import { ISurveyItem } from "./model/survey-item-model";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import ValidationSchema from "./model/validationSchema";
+import Button from "../../atoms/button";
+import { renderInput } from "../../utils/renderInput";
 
 const SurveyItem = (props: ISurveyItem) => {
   const { defaultValue, name, text, type, validations, isRequired, options } =
     props;
   console.log("type :>> ", type);
-  const renderInput = (question: any) => {
-    const { type, name, options } = question;
 
-    switch (type) {
-      case "TEXT":
-        return (
-          <input
-            type="text"
-            name={name}
-            className="border border-gray-300 rounded-md px-4 py-2"
-          />
-        );
-      case "RADIO":
-        return (
-          <>
-            {options.map((option: any) => (
-              <label key={option.key} className="flex items-center space-x-2">
-                <input
-                  type="radio"
-                  name={name}
-                  value={option.key}
-                  className="form-radio text-indigo-600 h-4 w-4"
-                />
-                <span>{option.text}</span>
-              </label>
-            ))}
-          </>
-        );
-      case "DATE":
-        return (
-          <input
-            type="date"
-            name={name}
-            className="border border-gray-300 rounded-md px-4 py-2"
-          />
-        );
-      case "CHECKBOX":
-        return (
-          <>
-            {options.map((option: any) => (
-              <label key={option.key} className="flex items-center space-x-2">
-                <input
-                  type="checkbox"
-                  name={name}
-                  value={option.key}
-                  className="form-checkbox text-indigo-600 h-4 w-4"
-                />
-                <span>{option.text}</span>
-              </label>
-            ))}
-          </>
-        );
-      case "NUMBER":
-        return (
-          <input
-            type="number"
-            name={name}
-            className="border border-gray-300 rounded-md px-4 py-2"
-          />
-        );
-      default:
-        return null;
-    }
+  const initialValues = {
+    name: "",
+    gender: "",
+    birthDate: "",
+    insurances: [],
+    phoneNumber: "",
   };
 
   return (
@@ -83,7 +30,27 @@ const SurveyItem = (props: ISurveyItem) => {
     >
       <div className="leading-[1.188rem] flex flex-col gap-2 lg:mb-8 mb-4 lg:px-5 px-[0.625rem] ">
         <div>{name}</div>
-        <div>{renderInput(props)}</div>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={ValidationSchema}
+          onSubmit={(values) => {
+            console.log(values);
+          }}
+        >
+          {(formikProps) => (
+            <Form>
+              {renderInput(props, formikProps)}
+              <div className="flex items-center">
+                <Button className="bg-[#0C45F5] mt-2 text-white rounded-[0.188rem] font-medium !min-h-[46px] px-2 text-center">
+                  Submit
+                </Button>
+                <Button variant="transparent" className=" underline">
+                  Vazgeç
+                </Button>
+              </div>
+            </Form>
+          )}
+        </Formik>
       </div>
     </AccordionItem>
   );
